@@ -1,0 +1,448 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/PauseMenuSelector.o
+LOAD build/DrawApple.o
+LOAD build/GameMenu.o
+LOAD build/Read_Data.o
+LOAD build/jtag.o
+LOAD build/HitDetection.o
+LOAD build/drawing.o
+LOAD build/itoa.o
+LOAD build/DrawPU.o
+LOAD build/menu.o
+LOAD build/Images.o
+LOAD build/WinMenu.o
+LOAD build/Write_Clock.o
+LOAD build/main.o
+LOAD build/shapes.o
+LOAD build/InitGPIO.o
+LOAD build/controllerinstances.o
+LOAD build/Wait.o
+LOAD build/LoseMenu.o
+LOAD build/Write_Latch.o
+LOAD build/DrawImage.o
+LOAD build/PauseMenu.o
+LOAD build/PaintScreen.o
+LOAD build/ReadSNES.o
+LOAD build/DrawDoor.o
+LOAD build/GameLoop.o
+LOAD uart.o
+LOAD gpio.o
+
+.init           0x00008000        0x4
+ *(.init)
+ .init          0x00008000        0x4 build/main.o
+                0x00008000                _start
+
+.data           0x00009080   0x1c4b96
+ *(.data)
+ .data          0x00009080        0x0 build/PauseMenuSelector.o
+ .data          0x00009080        0x0 build/DrawApple.o
+ .data          0x00009080        0xe build/GameMenu.o
+                0x00009080                Score
+                0x00009087                Lives
+ .data          0x0000908e        0x0 build/Read_Data.o
+ .data          0x0000908e        0x0 build/jtag.o
+ .data          0x0000908e        0x0 build/HitDetection.o
+ *fill*         0x0000908e        0x2 3f3f3f3f
+ .data          0x00009090      0x840 build/drawing.o
+                0x00009090                FrameBufferInfo
+                0x000090c0                FrameBufferPointer
+ .data          0x000098d0        0x0 build/itoa.o
+ .data          0x000098d0        0x0 build/DrawPU.o
+ .data          0x000098d0       0x70 build/menu.o
+                0x000098d0                MainMenu
+                0x000098da                StartGame
+                0x000098e5                QuitGame
+                0x000098ef                GameName
+                0x000098ff                Creators
+                0x00009935                mainMenuSelected
+ .data          0x00009940   0x1c4090 build/Images.o
+                0x00009940                brick
+                0x0000a140                obstacle
+                0x0000a940                SharkHead
+                0x0000b140                block
+                0x0000b940                Apple
+                0x0000c140                BodyImage
+                0x0000c940                BackgroundImage
+                0x0000d140                Door
+                0x0000d940                MainMenuImg
+                0x0018d940                QuitGameNoStar
+                0x0018e140                QuitGameStar
+                0x0018e940                StartGameNoStar
+                0x0018f140                StartGameStar
+                0x0018f940                PauseMenuImg
+                0x001cc9d0                PauseMenuShell
+                0x001cd1d0                PowerUp
+ .data          0x001cd9d0        0xb build/WinMenu.o
+ .data          0x001cd9db        0x0 build/Write_Clock.o
+ .data          0x001cd9db        0x0 build/main.o
+ .data          0x001cd9db        0x0 build/shapes.o
+ .data          0x001cd9db        0x0 build/InitGPIO.o
+ .data          0x001cd9db        0x0 build/controllerinstances.o
+ .data          0x001cd9db        0x0 build/Wait.o
+ .data          0x001cd9db        0xd build/LoseMenu.o
+                0x001cd9db                Lose
+ .data          0x001cd9e8        0x0 build/Write_Latch.o
+ .data          0x001cd9e8        0x0 build/DrawImage.o
+ .data          0x001cd9e8       0x21 build/PauseMenu.o
+                0x001cd9e8                Paused
+                0x001cd9f2                Restart
+                0x001cd9ff                Quit
+ .data          0x001cda09        0x0 build/PaintScreen.o
+ .data          0x001cda09        0x0 build/ReadSNES.o
+ .data          0x001cda09        0x0 build/DrawDoor.o
+ *fill*         0x001cda09        0x1 3f3f3f3f
+ .data          0x001cda0a      0x20c build/GameLoop.o
+                0x001cda0a                X
+                0x001cdb06                Y
+                0x001cdc09                AppleLocation
+                0x001cdc0f                ScoreCount
+                0x001cdc14                NumberToPrint
+ .data          0x001cdc16        0x0 uart.o
+ .data          0x001cdc16        0x0 gpio.o
+ *.c.o(*)
+
+.igot.plt       0x001cdc18        0x0
+ .igot.plt      0x00000000        0x0 build/PauseMenuSelector.o
+
+.text           0x001cdc18     0x1c60
+ *.c.o(.text)
+ *(.text)
+ .text          0x001cdc18      0x108 build/PauseMenuSelector.o
+                0x001cdc18                PauseMenuControl
+ .text          0x001cdd20       0x9c build/DrawApple.o
+                0x001cdd20                DrawApple
+ .text          0x001cddbc      0x454 build/GameMenu.o
+                0x001cddbc                GameMenu
+                0x001cdf6c                drawObstacles
+ .text          0x001ce210       0x28 build/Read_Data.o
+                0x001ce210                Read_Data
+ .text          0x001ce238       0x8c build/jtag.o
+                0x001ce238                EnableJTAG
+ .text          0x001ce2c4      0x2ac build/HitDetection.o
+                0x001ce2c4                HitDetection
+ .text          0x001ce570      0x1e8 build/drawing.o
+                0x001ce570                InitFrameBuffer
+                0x001ce5b8                DrawPixel
+                0x001ce5fc                MailboxWrite
+                0x001ce62c                MailboxRead
+                0x001ce660                DrawChar
+                0x001ce6bc                DrawSentence
+                0x001ce704                DrawSelector
+ .text          0x001ce758       0xac build/itoa.o
+                0x001ce758                itoa
+                0x001ce7d0                mod
+ .text          0x001ce804       0x9c build/DrawPU.o
+                0x001ce804                DrawPU
+ .text          0x001ce8a0       0xdc build/menu.o
+                0x001ce8a0                DrawMenus
+                0x001ce8d8                MainMenuSelect
+ .text          0x001ce97c        0x0 build/Images.o
+ .text          0x001ce97c       0x50 build/WinMenu.o
+                0x001ce97c                WinMenu
+ .text          0x001ce9cc       0x28 build/Write_Clock.o
+                0x001ce9cc                Write_Clock
+ .text          0x001ce9f4       0x28 build/main.o
+                0x001cea04                mainMenu$
+                0x001cea14                startGame
+ .text          0x001cea1c       0x50 build/shapes.o
+                0x001cea1c                DrawSquare
+ .text          0x001cea6c       0x68 build/InitGPIO.o
+                0x001cea6c                InitGPIO
+ .text          0x001cead4      0x110 build/controllerinstances.o
+                0x001cead4                MainMenuControl
+                0x001cead4                InGameMenuControl
+                0x001ceb90                LongDelayLoop
+                0x001cebac                ExtraLongDelayLoop
+ .text          0x001cebe4       0x28 build/Wait.o
+                0x001cebe4                Wait
+ .text          0x001cec0c       0x50 build/LoseMenu.o
+                0x001cec0c                LoseMenu
+ .text          0x001cec5c       0x28 build/Write_Latch.o
+                0x001cec5c                Write_Latch
+ .text          0x001cec84       0x54 build/DrawImage.o
+                0x001cec84                drawImage
+ .text          0x001cecd8       0x40 build/PauseMenu.o
+                0x001cecd8                PauseMenu
+ .text          0x001ced18       0x40 build/PaintScreen.o
+                0x001ced18                PaintScreen
+ .text          0x001ced58       0x70 build/ReadSNES.o
+                0x001ced58                ReadSNES
+ .text          0x001cedc8       0x9c build/DrawDoor.o
+                0x001cedc8                DrawDoor
+ .text          0x001cee64      0x788 build/GameLoop.o
+                0x001cee64                GameLoop
+                0x001ceecc                noReset
+                0x001ceff4                noDoor
+ .text          0x001cf5ec      0x1b4 uart.o
+                0x001cf5ec                InitUART
+                0x001cf6ac                PutCharUART
+                0x001cf6c8                GetCharUART
+                0x001cf6e4                WriteStringUART
+                0x001cf710                ReadLineUART
+ .text          0x001cf7a0       0xd8 gpio.o
+                0x001cf7a0                GetGpioAddress
+                0x001cf7a8                SetGpioFunction
+                0x001cf7f4                SetGpio
+                0x001cf830                GetGpio
+OUTPUT(build/output.elf elf32-littlearm)
+
+.glue_7         0x001cf878        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x001cf878        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x001cf878        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x001cf878        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x001cf878        0x0
+ .iplt          0x00000000        0x0 build/PauseMenuSelector.o
+
+.rel.dyn        0x001cf878        0x0
+ .rel.iplt      0x00000000        0x0 build/PauseMenuSelector.o
+
+.bss            0x001cf878        0x0
+ .bss           0x001cf878        0x0 build/PauseMenuSelector.o
+ .bss           0x001cf878        0x0 build/DrawApple.o
+ .bss           0x001cf878        0x0 build/GameMenu.o
+ .bss           0x001cf878        0x0 build/Read_Data.o
+ .bss           0x001cf878        0x0 build/jtag.o
+ .bss           0x001cf878        0x0 build/HitDetection.o
+ .bss           0x001cf878        0x0 build/drawing.o
+ .bss           0x001cf878        0x0 build/itoa.o
+ .bss           0x001cf878        0x0 build/DrawPU.o
+ .bss           0x001cf878        0x0 build/menu.o
+ .bss           0x001cf878        0x0 build/Images.o
+ .bss           0x001cf878        0x0 build/WinMenu.o
+ .bss           0x001cf878        0x0 build/Write_Clock.o
+ .bss           0x001cf878        0x0 build/main.o
+ .bss           0x001cf878        0x0 build/shapes.o
+ .bss           0x001cf878        0x0 build/InitGPIO.o
+ .bss           0x001cf878        0x0 build/controllerinstances.o
+ .bss           0x001cf878        0x0 build/Wait.o
+ .bss           0x001cf878        0x0 build/LoseMenu.o
+ .bss           0x001cf878        0x0 build/Write_Latch.o
+ .bss           0x001cf878        0x0 build/DrawImage.o
+ .bss           0x001cf878        0x0 build/PauseMenu.o
+ .bss           0x001cf878        0x0 build/PaintScreen.o
+ .bss           0x001cf878        0x0 build/ReadSNES.o
+ .bss           0x001cf878        0x0 build/DrawDoor.o
+ .bss           0x001cf878        0x0 build/GameLoop.o
+ .bss           0x001cf878        0x0 uart.o
+ .bss           0x001cf878        0x0 gpio.o
+
+.ARM.attributes
+                0x00000000       0x26
+ .ARM.attributes
+                0x00000000       0x26 build/PauseMenuSelector.o
+ .ARM.attributes
+                0x00000026       0x26 build/DrawApple.o
+ .ARM.attributes
+                0x0000004c       0x26 build/GameMenu.o
+ .ARM.attributes
+                0x00000072       0x26 build/Read_Data.o
+ .ARM.attributes
+                0x00000098       0x26 build/jtag.o
+ .ARM.attributes
+                0x000000be       0x26 build/HitDetection.o
+ .ARM.attributes
+                0x000000e4       0x26 build/drawing.o
+ .ARM.attributes
+                0x0000010a       0x26 build/itoa.o
+ .ARM.attributes
+                0x00000130       0x26 build/DrawPU.o
+ .ARM.attributes
+                0x00000156       0x26 build/menu.o
+ .ARM.attributes
+                0x0000017c       0x26 build/Images.o
+ .ARM.attributes
+                0x000001a2       0x26 build/WinMenu.o
+ .ARM.attributes
+                0x000001c8       0x26 build/Write_Clock.o
+ .ARM.attributes
+                0x000001ee       0x26 build/main.o
+ .ARM.attributes
+                0x00000214       0x26 build/shapes.o
+ .ARM.attributes
+                0x0000023a       0x26 build/InitGPIO.o
+ .ARM.attributes
+                0x00000260       0x26 build/controllerinstances.o
+ .ARM.attributes
+                0x00000286       0x26 build/Wait.o
+ .ARM.attributes
+                0x000002ac       0x26 build/LoseMenu.o
+ .ARM.attributes
+                0x000002d2       0x26 build/Write_Latch.o
+ .ARM.attributes
+                0x000002f8       0x26 build/DrawImage.o
+ .ARM.attributes
+                0x0000031e       0x26 build/PauseMenu.o
+ .ARM.attributes
+                0x00000344       0x26 build/PaintScreen.o
+ .ARM.attributes
+                0x0000036a       0x26 build/ReadSNES.o
+ .ARM.attributes
+                0x00000390       0x26 build/DrawDoor.o
+ .ARM.attributes
+                0x000003b6       0x26 build/GameLoop.o
+ .ARM.attributes
+                0x000003dc       0x26 uart.o
+ .ARM.attributes
+                0x00000402       0x26 gpio.o
+
+.debug_line     0x00000000      0xe79
+ .debug_line    0x00000000       0x90 build/PauseMenuSelector.o
+ .debug_line    0x00000090       0x6a build/DrawApple.o
+ .debug_line    0x000000fa      0x160 build/GameMenu.o
+ .debug_line    0x0000025a       0x4b build/Read_Data.o
+ .debug_line    0x000002a5       0x61 build/jtag.o
+ .debug_line    0x00000306       0xf5 build/HitDetection.o
+ .debug_line    0x000003fb       0xcf build/drawing.o
+ .debug_line    0x000004ca       0x6a build/itoa.o
+ .debug_line    0x00000534       0x67 build/DrawPU.o
+ .debug_line    0x0000059b       0x7e build/menu.o
+ .debug_line    0x00000619       0x53 build/WinMenu.o
+ .debug_line    0x0000066c       0x4f build/Write_Clock.o
+ .debug_line    0x000006bb       0x53 build/main.o
+ .debug_line    0x0000070e       0x52 build/shapes.o
+ .debug_line    0x00000760       0x5e build/InitGPIO.o
+ .debug_line    0x000007be       0x9b build/controllerinstances.o
+ .debug_line    0x00000859       0x48 build/Wait.o
+ .debug_line    0x000008a1       0x54 build/LoseMenu.o
+ .debug_line    0x000008f5       0x4f build/Write_Latch.o
+ .debug_line    0x00000944       0x56 build/DrawImage.o
+ .debug_line    0x0000099a       0x53 build/PauseMenu.o
+ .debug_line    0x000009ed       0x51 build/PaintScreen.o
+ .debug_line    0x00000a3e       0x5e build/ReadSNES.o
+ .debug_line    0x00000a9c       0x69 build/DrawDoor.o
+ .debug_line    0x00000b05      0x245 build/GameLoop.o
+ .debug_line    0x00000d4a       0xb6 uart.o
+ .debug_line    0x00000e00       0x79 gpio.o
+
+.debug_info     0x00000000      0xa6f
+ .debug_info    0x00000000       0x6b build/PauseMenuSelector.o
+ .debug_info    0x0000006b       0x63 build/DrawApple.o
+ .debug_info    0x000000ce       0x62 build/GameMenu.o
+ .debug_info    0x00000130       0x63 build/Read_Data.o
+ .debug_info    0x00000193       0x5e build/jtag.o
+ .debug_info    0x000001f1       0x66 build/HitDetection.o
+ .debug_info    0x00000257       0x61 build/drawing.o
+ .debug_info    0x000002b8       0x5e build/itoa.o
+ .debug_info    0x00000316       0x60 build/DrawPU.o
+ .debug_info    0x00000376       0x5e build/menu.o
+ .debug_info    0x000003d4       0x61 build/WinMenu.o
+ .debug_info    0x00000435       0x65 build/Write_Clock.o
+ .debug_info    0x0000049a       0x5a build/main.o
+ .debug_info    0x000004f4       0x60 build/shapes.o
+ .debug_info    0x00000554       0x62 build/InitGPIO.o
+ .debug_info    0x000005b6       0x6d build/controllerinstances.o
+ .debug_info    0x00000623       0x5e build/Wait.o
+ .debug_info    0x00000681       0x62 build/LoseMenu.o
+ .debug_info    0x000006e3       0x65 build/Write_Latch.o
+ .debug_info    0x00000748       0x63 build/DrawImage.o
+ .debug_info    0x000007ab       0x63 build/PauseMenu.o
+ .debug_info    0x0000080e       0x65 build/PaintScreen.o
+ .debug_info    0x00000873       0x62 build/ReadSNES.o
+ .debug_info    0x000008d5       0x62 build/DrawDoor.o
+ .debug_info    0x00000937       0x72 build/GameLoop.o
+ .debug_info    0x000009a9       0x63 uart.o
+ .debug_info    0x00000a0c       0x63 gpio.o
+
+.debug_abbrev   0x00000000      0x21a
+ .debug_abbrev  0x00000000       0x14 build/PauseMenuSelector.o
+ .debug_abbrev  0x00000014       0x14 build/DrawApple.o
+ .debug_abbrev  0x00000028       0x14 build/GameMenu.o
+ .debug_abbrev  0x0000003c       0x14 build/Read_Data.o
+ .debug_abbrev  0x00000050       0x14 build/jtag.o
+ .debug_abbrev  0x00000064       0x14 build/HitDetection.o
+ .debug_abbrev  0x00000078       0x14 build/drawing.o
+ .debug_abbrev  0x0000008c       0x14 build/itoa.o
+ .debug_abbrev  0x000000a0       0x14 build/DrawPU.o
+ .debug_abbrev  0x000000b4       0x14 build/menu.o
+ .debug_abbrev  0x000000c8       0x14 build/WinMenu.o
+ .debug_abbrev  0x000000dc       0x14 build/Write_Clock.o
+ .debug_abbrev  0x000000f0       0x12 build/main.o
+ .debug_abbrev  0x00000102       0x14 build/shapes.o
+ .debug_abbrev  0x00000116       0x14 build/InitGPIO.o
+ .debug_abbrev  0x0000012a       0x14 build/controllerinstances.o
+ .debug_abbrev  0x0000013e       0x14 build/Wait.o
+ .debug_abbrev  0x00000152       0x14 build/LoseMenu.o
+ .debug_abbrev  0x00000166       0x14 build/Write_Latch.o
+ .debug_abbrev  0x0000017a       0x14 build/DrawImage.o
+ .debug_abbrev  0x0000018e       0x14 build/PauseMenu.o
+ .debug_abbrev  0x000001a2       0x14 build/PaintScreen.o
+ .debug_abbrev  0x000001b6       0x14 build/ReadSNES.o
+ .debug_abbrev  0x000001ca       0x14 build/DrawDoor.o
+ .debug_abbrev  0x000001de       0x14 build/GameLoop.o
+ .debug_abbrev  0x000001f2       0x14 uart.o
+ .debug_abbrev  0x00000206       0x14 gpio.o
+
+.debug_aranges  0x00000000      0x368
+ .debug_aranges
+                0x00000000       0x20 build/PauseMenuSelector.o
+ .debug_aranges
+                0x00000020       0x20 build/DrawApple.o
+ .debug_aranges
+                0x00000040       0x20 build/GameMenu.o
+ .debug_aranges
+                0x00000060       0x20 build/Read_Data.o
+ .debug_aranges
+                0x00000080       0x20 build/jtag.o
+ .debug_aranges
+                0x000000a0       0x20 build/HitDetection.o
+ .debug_aranges
+                0x000000c0       0x20 build/drawing.o
+ .debug_aranges
+                0x000000e0       0x20 build/itoa.o
+ .debug_aranges
+                0x00000100       0x20 build/DrawPU.o
+ .debug_aranges
+                0x00000120       0x20 build/menu.o
+ .debug_aranges
+                0x00000140       0x20 build/WinMenu.o
+ .debug_aranges
+                0x00000160       0x20 build/Write_Clock.o
+ .debug_aranges
+                0x00000180       0x28 build/main.o
+ .debug_aranges
+                0x000001a8       0x20 build/shapes.o
+ .debug_aranges
+                0x000001c8       0x20 build/InitGPIO.o
+ .debug_aranges
+                0x000001e8       0x20 build/controllerinstances.o
+ .debug_aranges
+                0x00000208       0x20 build/Wait.o
+ .debug_aranges
+                0x00000228       0x20 build/LoseMenu.o
+ .debug_aranges
+                0x00000248       0x20 build/Write_Latch.o
+ .debug_aranges
+                0x00000268       0x20 build/DrawImage.o
+ .debug_aranges
+                0x00000288       0x20 build/PauseMenu.o
+ .debug_aranges
+                0x000002a8       0x20 build/PaintScreen.o
+ .debug_aranges
+                0x000002c8       0x20 build/ReadSNES.o
+ .debug_aranges
+                0x000002e8       0x20 build/DrawDoor.o
+ .debug_aranges
+                0x00000308       0x20 build/GameLoop.o
+ .debug_aranges
+                0x00000328       0x20 uart.o
+ .debug_aranges
+                0x00000348       0x20 gpio.o
+
+.debug_ranges   0x00000000       0x20
+ .debug_ranges  0x00000000       0x20 build/main.o
